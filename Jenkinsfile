@@ -6,7 +6,8 @@ pipeline {
   }
   parameters{
     //string(name:'ENTRADA', defaultValue: 'Hola', description:'Un parametro requerido')
-    password(name:'CONTRASENIA', defaultValue: 'esta es mi contrasenia', description:'contrasenia requerida')
+    //password(name:'CONTRASENIA', defaultValue: 'esta es mi contrasenia', description:'contrasenia requerida')
+    string(name:'CONTRASENIA', defaultValue: 'esta es mi contrasenia', description:'contrasenia requerida')
   }  
 
   stages {
