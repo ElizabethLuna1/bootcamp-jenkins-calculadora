@@ -18,4 +18,14 @@ pipeline {
     }
   }
 
+  post {
+    always {
+      discordSend webhookURL: WEBHOOKURL,
+        link: env.BUILD_URL,
+        result: currentBuild.currentResult,
+        title: env.BUILD_URL,
+        description: env.JOB_NAME,
+        footer: currentBuild.currentResult
+    }
+  }
 }
