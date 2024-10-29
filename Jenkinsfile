@@ -5,6 +5,10 @@ pipeline {
     maven "maven 3.9.9"
   }
 
+  environment {
+    WEBHOOKURL = credentials('discord-webhook')
+  }
+
   stages {
     stage('Build') {
       steps {
