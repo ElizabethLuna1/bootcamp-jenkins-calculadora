@@ -5,13 +5,15 @@ pipeline {
     maven "maven 3.9.9"
   }
   parameters{
-    string(name:'ENTRADA', defaultValue: 'Hola', description:'Un parametro requerido')
+    //string(name:'ENTRADA', defaultValue: 'Hola', description:'Un parametro requerido')
+    password(name:'CONTRASENIA', defaultValue: 'esta es mi contrasenia', description:'contrasenia requerida')
   }  
 
   stages {
     stage ('ejemplo') {
       steps {
-        echo params.ENTRADA
+        //echo params.ENTRADA
+        echo params.CONTRASENIA
       }
     }
     stage('Build') {
