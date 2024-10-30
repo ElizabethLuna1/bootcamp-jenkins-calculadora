@@ -16,13 +16,13 @@ pipeline {
         }
       }
     }
+  }
 
-    post {
-      always {
-        mail to: 'eli.liza.moon@gmail.com, josepp0117@gmail.com, pietromineralle@gmail.com, kiregon@gmail.com, ing.armandohb@gmail.com, lreyeso1001@gmail.com',
-          subject: env.JOB_NAME,
-          body: currentBuild.currentResult + ': ' + env.BUILD_URL
-      }
+  post {
+    always {
+      mail to: 'eli.liza.moon@gmail.com, josepp0117@gmail.com, pietromineralle@gmail.com, kiregon@gmail.com, ing.armandohb@gmail.com, lreyeso1001@gmail.com',
+        subject: env.JOB_NAME,
+        body: currentBuild.currentResult + ': ' + env.BUILD_URL
     }
   }
 
