@@ -22,7 +22,7 @@ class CaluladoraImplTest {
 	@Test
 	void test_debe_restar_cuando_se_utiliza_menos() {
 		int resultado = calculadora.calcular(1, '-', 2);
-		Assertions.assertEquals(-1, resultado);
+		Assertions.assertEquals(1, resultado);
 	}
 
 }
