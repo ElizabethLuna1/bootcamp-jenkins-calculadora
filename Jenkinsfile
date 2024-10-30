@@ -16,6 +16,12 @@ pipeline {
         }
       }
     }
+
+    post {
+      mail to to: 'mcnewster@gmail.com',
+        subject: env.JOB_NAME,
+        body: currentBuild.currentResult + ': ' + env.BUILD_URL
+    }
   }
 
 }
