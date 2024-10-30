@@ -5,6 +5,10 @@ pipeline {
     maven "maven 3.9.9"
   }
 
+  environment {
+    WEBHOOKURL = credentials('discord')
+  }
+
   stages {
     stage('Build') {
       steps {
@@ -20,9 +24,12 @@ pipeline {
 
   post {
     always {
-      mail to: 'eli.liza.moon@gmail.com, josepp0117@gmail.com, pietromineralle@gmail.com, kiregon@gmail.com, ing.armandohb@gmail.com, lreyeso1001@gmail.com',
-        subject: env.JOB_NAME,
-        body: currentBuild.currentResult + ': ' + env.BUILD_URL
+      discordSend webhookURL: WEBHOOKURL,
+        link: env.BUILD_URL,
+        result: currentBuild.currentResult,
+        title: env.BUILD_URL,
+        description: env.JOB_NAME,
+        footer: currentBuild.currentResult
     }
   }
 
