@@ -28,6 +28,14 @@ pipeline {
         }
     }
     }
+    post{
+      always{
+        mail to: 'eli.liza.moon@gmail.com',
+          subject: env.JOB_NAME,
+          body: currentBuild.currentResult + ':' + env.BUILD_URL
+      }
+      
+    }
 
   }
 
