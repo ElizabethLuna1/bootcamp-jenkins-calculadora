@@ -6,7 +6,7 @@ pipeline {
   }
 
   environment {
-    WEBHOOKURL = credentials('discord-webhook')
+    WEBHOOKURL = credentials('discord')
   }
 
   stages {
