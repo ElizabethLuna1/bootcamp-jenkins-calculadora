@@ -32,4 +32,5 @@ pipeline {
         footer: currentBuild.currentResult
     }
   }
+
 }
