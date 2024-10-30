@@ -10,19 +10,21 @@ pipeline {
   }
 
   stages {
-    parallel {
-      stage('node') {
-        steps {
-          echo 'hola'
+    stage('big') {
+      parallel {
+        stage('node') {
+          steps {
+            echo 'hola'
+          }
         }
-      }
-      stage('Build21') {
-        steps {
-          bat 'mvn -B -q package'
-        }
-        post {
-          always {
-            junit 'target/surefire-reports/*.xml'
+        stage('Build21') {
+          steps {
+            bat 'mvn -B -q package'
+          }
+          post {
+            always {
+              junit 'target/surefire-reports/*.xml'
+            }
           }
         }
       }
