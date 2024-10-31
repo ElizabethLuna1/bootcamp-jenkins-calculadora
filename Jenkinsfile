@@ -44,7 +44,7 @@ pipeline {
         failure{
           echo "falla..."
         }
-        seccess{
+        success{
           echo "éxito"
         }
         aborted{
