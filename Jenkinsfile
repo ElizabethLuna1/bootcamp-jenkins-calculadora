@@ -38,8 +38,6 @@ pipeline {
     }
 
   }
-
-}
 post{
   failure{
     echo "falla..."
@@ -61,4 +59,6 @@ post{
   }
 
   
+  }
 }
+
