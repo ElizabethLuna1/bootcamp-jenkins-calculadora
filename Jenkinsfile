@@ -22,20 +22,20 @@ pipeline {
         //sh  'mvn -B -q package' 
         bat 'mvn -B -q package'
       }
-       post {
+     /*  post {
         always {
           junit 'target/surefire-reports/*.xml'
         }
+    }*/
     }
-    }
-    post{
+ /*   post{
       always{
         mail to: 'eli.liza.moon@gmail.com',
           subject: env.JOB_NAME,
           body: currentBuild.currentResult + ':' + env.BUILD_URL
       }
       
-    }
+    }*/
     post{
   failure{
     echo "falla..."
