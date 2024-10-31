@@ -40,3 +40,25 @@ pipeline {
   }
 
 }
+post{
+  failure{
+    echo "falla..."
+  }
+  seccess{
+    echo "éxito"
+  }
+  aborted{
+    echo "se aborta..."
+  }
+  changed{
+    echo "hubo cambios.."
+  }
+  fixed{
+    echo "arreglado.."
+  }
+  always{
+    echo "siempre se ejecuta"
+  }
+
+  
+}
