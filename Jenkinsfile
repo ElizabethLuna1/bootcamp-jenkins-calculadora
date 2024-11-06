@@ -1,66 +1,119 @@
 pipeline {
-  agent {label 'jdk21'}
-
-  tools {
-    maven "maven 3.9.9"
+  agent any
+  //agent { label 'jdk21' }
+  /*
+  environment {
+    WEBHOOKURL = credentials('discord-webhook')
   }
-  parameters{
-    //string(name:'ENTRADA', defaultValue: 'Hola', description:'Un parametro requerido')
-    //password(name:'CONTRASENIA', defaultValue: 'esta es mi contrasenia', description:'contrasenia requerida')
-    string(name:'CONTRASENIA', defaultValue: 'esta es mi contrasenia', description:'contrasenia requerida')
-  }  
+  */
+  
+   tools {
+      maven "maven 3.9.9"
+   }
+  
+   parameters {
+      string(name: 'ENTRADA', defaultValue:'hola', description:'Parametro requerido')
+   }
 
   stages {
-    stage ('ejemplo') {
+    /*
+    stage ('JAVA 8') {
+      agent {
+        label 'jdk8'
+      }
       steps {
-        //echo params.ENTRADA
-        echo params.CONTRASENIA
+        echo "Esto es java 8"
       }
     }
+    */
+    
+    stage ('Ejemplo') {
+      /*
+      agent {
+        label 'jdk21'
+      }
+      */
+      steps {
+        echo params.ENTRADA
+      }
+    }
+    
     stage('Build') {
       steps {
-        //sh  'mvn -B -q package' 
         bat 'mvn -B -q package'
       }
-       post {
+      post {
         always {
           junit 'target/surefire-reports/*.xml'
         }
-    }
-    }
-   post{
-      always{
-        mail to: 'eli.liza.moon@gmail.com',
-          subject: env.JOB_NAME,
-          body: currentBuild.currentResult + ':' + env.BUILD_URL
       }
-      
     }
- 
-
   }
-
-     post{
-        failure{
-          echo "falla..."
-        }
-        success{
-          echo "éxito"
-        }
-        aborted{
-          echo "se aborta..."
-        }
-        changed{
-          echo "hubo cambios.."
-        }
-      fixed{
-        echo "arreglado.."
-      }
-      always{
-        echo "siempre se ejecuta"
-      }
-
-  
+  post {
+    failure {
+      echo "Cuando falla"
     }
-
+    success {
+      echo "Se ejecuto con exito"
+    }
+    aborted {
+      echo "El job se aborto"
+    }
+    changed {
+      echo "Cambió"
+    }
+    fixed {
+      echo "Arreglado"
+    }
+    always {
+      echo "Siempre se ejecuta"
+    }
+  }
 }
+
+
+ /*
+  stages {
+    paralel {
+      stage ('JAVA 8') {
+        agent {
+          label 'jdk8'
+        }
+        steps {
+          echo "Esto es java 8"
+        }
+      }
+      stage ('JAVA 21') {
+        agent {
+          label 'jdk21'
+        }
+        steps {
+          echo "Esto es java 21"
+        }
+      }
+    }
+  }
+  */
+    
+/*
+    post {
+      always {
+        discordSend webhookURL: WEBHOOKURL,
+          link: env.BUILD_URL,
+          result: currentBuild.currentResult,
+          title: env.BUILD_URL,
+          description: env.JOB_NAME,
+          footer: currentBuild.currentResult
+      }
+    }
+    */
+    
+/*
+    post {
+      always {
+        mail to: 'madrigal.bd@gmail.com, davidmadrigalbuendia@gmail.com',
+          subject: env.JOB_NAME,
+          body: currentBuild.currentResult + ': ' + env.BUILD_URL
+      }
+    }
+*/
