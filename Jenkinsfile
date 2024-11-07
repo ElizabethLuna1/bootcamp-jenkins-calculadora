@@ -37,7 +37,13 @@ pipeline {
         echo params.ENTRADA
       }
     }
-    
+    stage('Deploy') {
+        steps {
+            /*bat 'D:\devenv\CURSO-GIT-PRUEBAS\apache-tomcat-9.0.96_2\bin\shutdown.bat'*/
+            bat 'copy target\\ROOT.war D:\devenv\CURSO-GIT-PRUEBAS\apache-tomcat-9.0.96_2'+ params.DEPLOY_ENVIRONMENT +'\\webapps'
+            /*bat 'D:\devenv\CURSO-GIT-PRUEBAS\apache-tomcat-9.0.96_2\bin\startup.bat'*/
+        }
+    } 
     stage('Build') {
       steps {
         bat 'mvn -B -q package'
